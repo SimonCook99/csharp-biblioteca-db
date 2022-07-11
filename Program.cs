@@ -49,14 +49,7 @@ if (Sistema.loginEffettuato){
         case 1:
             Console.WriteLine("Inserisci il titolo del libro che vuoi cercare");
             string titoloLibro = Console.ReadLine();
-            //Documento libro = s.ricercaDocumento(titoloLibro);
-            //if (libro != null){
-            //    Console.WriteLine($"Risultato trovato: {libro.titolo} del {libro.anno} scritto da {libro.nomeAutore} {libro.cognomeAutore}");
-            //    if (libro.disponibilità == true) 
-            //        Console.WriteLine("Attualmente disponibile");
-            //    else
-            //        Console.WriteLine("Attualmente non disponibile");
-            //}
+            s.ricercaDocumento(titoloLibro);
             break;
         case 2:
 
@@ -64,18 +57,3 @@ if (Sistema.loginEffettuato){
     }
 }
 
-
-
-// Biblioteca online
-// 1. Cerca libri
-// 2. Cerca dvd
-
-
-
-// Menu libro (titolo)
-// 1. visualizza dettagli libro
-// 2. richiedi prestito
-// 3. restitutisci
-
-
-// tutti i menu hanno esci o torna indietro

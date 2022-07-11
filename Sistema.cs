@@ -95,15 +95,37 @@ namespace csharp_biblioteca
             //}
         }
 
-        //public Documento ricercaDocumento(string nome){
-            //foreach (Documento documento in documentiPresenti){
-            //    if(documento.titolo == nome){
-            //        return documento;
-            //    }
-            //}
-            //Console.WriteLine("Spiacente, non ho trovato nessun elemento con questo titolo");
-            //return null;
-        //}
+        public void ricercaDocumento(string nome){
+            using (SqlConnection con = new SqlConnection(connection)){
+                try{
+                    con.Open();
+
+                    string query = " SELECT * FROM Books WHERE title=@Title";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con)){
+                        cmd.Parameters.Add(new SqlParameter("@Title", nome));
+                        using (SqlDataReader reader = cmd.ExecuteReader()){
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+                                string titolo = reader.GetString(1);
+                                string autore = reader.GetString(2);
+                                int anno = reader.GetInt32(3);
+                                Console.WriteLine($"Libro trovato! {titolo} di {autore} del {anno}");
+                            }
+                            else{
+                                Console.WriteLine("Spiacente, non abbiamo trovato libro con questo titolo");
+                            }
+                        }
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
     }
 
     
