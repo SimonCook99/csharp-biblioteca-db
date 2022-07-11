@@ -11,6 +11,7 @@ namespace csharp_biblioteca
 
         public string connection = "Data Source=localhost;Initial Catalog=db-biblioteca;Integrated Security=True";
 
+        public static bool loginEffettuato = false;
 
         public void registraNuovoUtente(Utente nuovoUtente){
 
@@ -28,24 +29,44 @@ namespace csharp_biblioteca
 
                     int rows = cmd.ExecuteNonQuery();
                     Console.WriteLine("Registrazione effettuata correttamente");
-                }
-                catch(Exception e){
+                    
+                    loginEffettuato = true;
+                }catch(Exception e){
                     Console.WriteLine(e.Message);
                 }
             }
 
         }
 
-        public void effettuaLogin(string email){
-            //foreach (Utente user in this.utentiRegistrati){
-            //    if (user.email == email){
-            //        Console.WriteLine("Hai fatto l'accesso come " + user.nome);
-            //        return;
-            //    }
-            //    else{
-            //        Console.WriteLine("Utente non trovato");
-            //    }
-            //}
+        public void effettuaLogin(string email, string password){
+
+            using (SqlConnection con = new SqlConnection(connection)){
+                try{
+                    con.Open();
+
+                    string query = " SELECT * FROM Users WHERE email=@Email AND password=@Password";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.Add(new SqlParameter("@Email", email));
+                        cmd.Parameters.Add(new SqlParameter("@Password", password));
+                        using (SqlDataReader reader = cmd.ExecuteReader()){
+                            if (reader.HasRows)
+                            {
+                                Console.WriteLine("Login effettuato correttamente!");
+                                loginEffettuato = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Spiacenti, non abbiamo trovato un utente con queste credenziali");
+                            }
+                        }
+
+                    }
+                }catch (Exception e){
+                    Console.WriteLine(e.Message);
+                }
+            }
         }
 
         public void effettuaPrestito(Utente utente, Documento item){

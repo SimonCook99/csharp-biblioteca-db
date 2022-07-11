@@ -24,7 +24,7 @@ switch (opzione){
         string password = Console.ReadLine();
 
         Utente nuovo = new Utente(nome, cognome, email, password);
-        s.registraNuovoUtente(nuovo); //gestire il fatto del null dei cartteri
+        s.registraNuovoUtente(nuovo);
         break;
     case 2: //login
         Console.WriteLine("Inserisci la tua email: ");
@@ -32,32 +32,36 @@ switch (opzione){
         Console.WriteLine("Inserisci la tua password: ");
         string passwordLogin = Console.ReadLine();
 
-        s.effettuaLogin(emailLogin);
+        s.effettuaLogin(emailLogin, passwordLogin);
         break;
 }
 
-Console.WriteLine("Benvenuto utente registrato, cosa vuoi fare?");
-Console.WriteLine("1: cerca titolo libro");
-Console.WriteLine("2: cerca codice identificativo");
+//se l'utente ha fatto login...
+if (Sistema.loginEffettuato){
 
-int opzioneUtenteLoggato = int.Parse(Console.ReadLine());
+    Console.WriteLine("Benvenuto utente registrato, cosa vuoi fare?");
+    Console.WriteLine("1: cerca titolo libro");
+    Console.WriteLine("2: cerca codice identificativo");
 
-switch (opzioneUtenteLoggato){
-    case 1:
-        Console.WriteLine("Inserisci il titolo del libro che vuoi cercare");
-        string titoloLibro = Console.ReadLine();
-        //Documento libro = s.ricercaDocumento(titoloLibro);
-        //if (libro != null){
-        //    Console.WriteLine($"Risultato trovato: {libro.titolo} del {libro.anno} scritto da {libro.nomeAutore} {libro.cognomeAutore}");
-        //    if (libro.disponibilità == true) 
-        //        Console.WriteLine("Attualmente disponibile");
-        //    else
-        //        Console.WriteLine("Attualmente non disponibile");
-        //}
-        break;
-    case 2:
+    int opzioneUtenteLoggato = int.Parse(Console.ReadLine());
 
-        break;
+    switch (opzioneUtenteLoggato){
+        case 1:
+            Console.WriteLine("Inserisci il titolo del libro che vuoi cercare");
+            string titoloLibro = Console.ReadLine();
+            //Documento libro = s.ricercaDocumento(titoloLibro);
+            //if (libro != null){
+            //    Console.WriteLine($"Risultato trovato: {libro.titolo} del {libro.anno} scritto da {libro.nomeAutore} {libro.cognomeAutore}");
+            //    if (libro.disponibilità == true) 
+            //        Console.WriteLine("Attualmente disponibile");
+            //    else
+            //        Console.WriteLine("Attualmente non disponibile");
+            //}
+            break;
+        case 2:
+
+            break;
+    }
 }
 
 
