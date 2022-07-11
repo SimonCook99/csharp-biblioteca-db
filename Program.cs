@@ -22,10 +22,8 @@ switch (opzione){
         string email = Console.ReadLine();
         Console.WriteLine("Inserisci la tua password");
         string password = Console.ReadLine();
-        Console.WriteLine("Inserisci il tuo telefono");
-        string telefono = Console.ReadLine();
 
-        Utente nuovo = new Utente(nome, cognome, email, password, telefono);
+        Utente nuovo = new Utente(nome, cognome, email, password);
         s.registraNuovoUtente(nuovo); //gestire il fatto del null dei cartteri
         break;
     case 2: //login
@@ -40,8 +38,7 @@ switch (opzione){
 
 Console.WriteLine("Benvenuto utente registrato, cosa vuoi fare?");
 Console.WriteLine("1: cerca titolo libro");
-Console.WriteLine("2: cerca titolo DVD");
-Console.WriteLine("3: cerca codice identificativo");
+Console.WriteLine("2: cerca codice identificativo");
 
 int opzioneUtenteLoggato = int.Parse(Console.ReadLine());
 
@@ -49,30 +46,16 @@ switch (opzioneUtenteLoggato){
     case 1:
         Console.WriteLine("Inserisci il titolo del libro che vuoi cercare");
         string titoloLibro = Console.ReadLine();
-        Documento libro = s.ricercaDocumento(titoloLibro);
-        if (libro != null){
-            Console.WriteLine($"Risultato trovato: {libro.titolo} del {libro.anno} scritto da {libro.nomeAutore} {libro.cognomeAutore}");
-            if (libro.disponibilità == true) 
-                Console.WriteLine("Attualmente disponibile");
-            else
-                Console.WriteLine("Attualmente non disponibile");
-        }
+        //Documento libro = s.ricercaDocumento(titoloLibro);
+        //if (libro != null){
+        //    Console.WriteLine($"Risultato trovato: {libro.titolo} del {libro.anno} scritto da {libro.nomeAutore} {libro.cognomeAutore}");
+        //    if (libro.disponibilità == true) 
+        //        Console.WriteLine("Attualmente disponibile");
+        //    else
+        //        Console.WriteLine("Attualmente non disponibile");
+        //}
         break;
     case 2:
-        Console.WriteLine("Inserisci il titolo del DVD che vuoi cercare");
-        string titoloDVD = Console.ReadLine();
-        Documento DVD = s.ricercaDocumento(titoloDVD);
-        if (DVD != null) {
-            Console.WriteLine($"Risultato trovato: {DVD.titolo} del {DVD.anno} scritto da {DVD.nomeAutore} {DVD.cognomeAutore}");
-            if (DVD.disponibilità == true){
-                Console.WriteLine(DVD.GetType().GetProperty("numeroSeriale"));
-                Console.WriteLine("Attualmente disponibile");
-            }
-            else
-                Console.WriteLine("Attualmente non disponibile");
-        }
-        break;
-    case 3:
 
         break;
 }
